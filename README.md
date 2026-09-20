@@ -31,19 +31,7 @@ love .
 
 La velocidad de la pelota está limitada (`maxSpeed`) para que el juego siga siendo jugable.
 
-## Arquitectura
-
-```
-Scene ("breakout")
-├── registry   los DATOS: componentes indexados por entidad
-│     position, size, velocity, color            (datos)
-│     paddle, ball, block, clamp, bounceWalls    (tags / config)
-│     match                                      (singleton: estado de la partida)
-│     keyPressed, serveRequest, ballBounced      (eventos como entidades)
-└── systems    la LÓGICA, en orden de frame
-```
-
-Orden de los systems (el orden ES el orden del frame):
+## Orden de los systems
 
 | System | Qué hace |
 |---|---|
@@ -59,17 +47,3 @@ Orden de los systems (el orden ES el orden del frame):
 | `MatchSystem` | Estado de la partida: gana / pierde / cierra el juego |
 | `RenderSystem` | Dibuja toda entidad con `position + size + color` y la UI |
 
-Los systems no se llaman entre sí: se comunican escribiendo datos en el registry
-(por ejemplo, una colisión crea una entidad `ballBounced` y `BallSpeedSystem` la consume).
-`main.lua` no tiene lógica de juego: arma la escena y reenvía los callbacks de LÖVE.
-
-```
-main.lua
-conf.lua
-src/
-├── Collision.lua        AABB compartido
-├── ecs/
-│   ├── Registry.lua
-│   └── Scene.lua
-└── systems/             un archivo por system, nombre de archivo = nombre del módulo
-```
