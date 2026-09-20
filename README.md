@@ -1,7 +1,6 @@
 # Breakout ECS
 
-Breakout en [LÖVE](https://love2d.org/) 11.5 construido sobre un ECS escrito a mano
-(el `Registry` + `Scene` de la clase `02-ECS`).
+Breakout en [LÖVE](https://love2d.org/) 11.5.
 
 ```sh
 love .
