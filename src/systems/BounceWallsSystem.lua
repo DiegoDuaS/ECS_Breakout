@@ -1,8 +1,3 @@
--- Entities tagged with `bounceWalls` reflect off the left, right and top
--- walls. The bottom is NOT a wall: a ball that reaches it is lost
--- (MatchSystem). Each bounce emits a `ballBounced` event so the
--- BallSpeedSystem can speed the ball up. Runs AFTER movement.
-
 local BounceWallsSystem = {}
 
 function BounceWallsSystem.update(scene, dt)

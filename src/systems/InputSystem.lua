@@ -1,10 +1,3 @@
--- Turns raw key presses into game actions. love.keypressed only spawns a
--- tiny entity carrying a `keyPressed` component; this system consumes it
--- here, inside the normal update order ("events as entities").
---
--- (Held keys are state, not events: PaddleControlSystem polls
--- love.keyboard.isDown each frame instead.)
-
 local InputSystem = {}
 
 function InputSystem.update(scene, dt)
@@ -12,7 +5,7 @@ function InputSystem.update(scene, dt)
     local _, match = registry:first("match")
 
     for keyEntity, event in registry:each("keyPressed") do
-        registry:destroy(keyEntity) -- consume the event
+        registry:destroy(keyEntity)
 
         if event.key == "escape" then
             love.event.quit()

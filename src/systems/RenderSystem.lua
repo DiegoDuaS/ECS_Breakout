@@ -1,6 +1,3 @@
--- Draws everything: every entity with position + size + color, and the UI.
--- It's the only system with a `draw` instead of an `update`.
-
 local RenderSystem = {}
 
 local bigFont, smallFont
@@ -11,8 +8,6 @@ function RenderSystem.setup(scene)
 end
 
 function RenderSystem.unload(scene)
-    -- Dropping the references is enough: LÖVE objects are garbage
-    -- collected. Don't release() a font that may still be the current one.
     bigFont, smallFont = nil, nil
 end
 

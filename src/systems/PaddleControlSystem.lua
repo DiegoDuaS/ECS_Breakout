@@ -1,6 +1,3 @@
--- Reads the keyboard and turns it into horizontal velocity for paddle
--- entities. It doesn't move anything: that's the MovementSystem's job.
-
 local WIDTH, HEIGHT = 100, 20
 local BOTTOM_MARGIN = 40
 
@@ -13,7 +10,6 @@ local function anyDown(keys)
     return false
 end
 
--- This system owns the paddle, so it creates it.
 function PaddleControlSystem.setup(scene)
     scene.registry:spawn({
         position = {

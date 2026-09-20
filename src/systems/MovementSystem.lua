@@ -1,6 +1,3 @@
--- Integrates velocity into position, for ANY entity that has both.
--- Time based: velocity is in pixels per second, scaled by dt.
-
 local MovementSystem = {}
 
 function MovementSystem.update(scene, dt)

@@ -1,16 +1,3 @@
-----------------------------------------------------------------------
--- Breakout on an Entity-Component-System
---
---   Scene      the game screen; owns a Registry + ordered Systems
---   Registry   the DATA: components indexed by entity
---   Entity     just a number — a key into the registry
---   System     the LOGIC: runs over entities that have certain components
---
--- main.lua holds NO game logic: it assembles the scene and forwards
--- LÖVE's callbacks. Even a key press becomes a tiny `keyPressed` entity
--- that the InputSystem consumes.
-----------------------------------------------------------------------
-
 local Scene = require("src.ecs.Scene")
 
 local InputSystem = require("src.systems.InputSystem")
@@ -25,8 +12,6 @@ local BallSpeedSystem = require("src.systems.BallSpeedSystem")
 local MatchSystem = require("src.systems.MatchSystem")
 local RenderSystem = require("src.systems.RenderSystem")
 
--- A long frame (dragging the window, a hiccup) would teleport the ball
--- through the paddle or the bottom wall, so cap the time step.
 local MAX_DT = 1 / 30
 
 local scene
@@ -34,8 +19,6 @@ local scene
 function love.load()
     scene = Scene.new("breakout")
 
-    -- system order IS the frame order: input -> spawn -> control ->
-    -- simulate -> resolve -> speed up -> match rules -> draw
     scene:addSystem(InputSystem)
     scene:addSystem(BallSpawnSystem)
     scene:addSystem(PaddleControlSystem)
@@ -48,7 +31,7 @@ function love.load()
     scene:addSystem(MatchSystem)
     scene:addSystem(RenderSystem)
 
-    scene:setup() -- each system creates what it owns
+    scene:setup()
 end
 
 function love.update(dt)

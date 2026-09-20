@@ -1,7 +1,3 @@
--- Collision between balls and the paddle: push the ball out, invert its
--- vertical movement, and emit a `ballBounced` event (speed-up happens in
--- BallSpeedSystem).
-
 local Collision = require("src.Collision")
 
 local PaddleHitsSystem = {}
@@ -12,8 +8,6 @@ function PaddleHitsSystem.update(scene, dt)
     if match.state ~= "play" then return end
 
     for ballEntity, bp, bs, bv in registry:each("position", "size", "velocity", "ball") do
-        -- only a ball moving DOWN can hit the paddle: this stops a ball that
-        -- is already leaving from bouncing twice on the same overlap
         if bv.vy > 0 then
             for _, pp, ps in registry:each("position", "size", "paddle") do
                 if Collision.aabb(bp.x, bp.y, bs.w, bs.h, pp.x, pp.y, ps.w, ps.h) then

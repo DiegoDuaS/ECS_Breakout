@@ -1,17 +1,7 @@
--- Owns the match state (a singleton component) and decides how it ends:
---
---   lost  every ball reached the bottom of the screen
---   won   every block was destroyed
---
--- When the match ends, every simulation system freezes (they all check
--- `match.state`), the message stays on screen for a moment, and then the
--- game closes.
-
-local CLOSE_DELAY = 2 -- seconds the final message stays visible
+local CLOSE_DELAY = 2
 
 local MatchSystem = {}
 
--- This system owns the match state, so it creates it.
 function MatchSystem.setup(scene)
     scene.registry:spawn({
         match = { state = "play", message = "", closeIn = CLOSE_DELAY },

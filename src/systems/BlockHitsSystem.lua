@@ -1,7 +1,3 @@
--- Owns the blocks. Creates the grid at setup; on update, a ball touching a
--- block destroys it and inverts the ball's vertical movement. One block
--- per ball per frame, so a ball can't chew through two blocks at once.
-
 local Collision = require("src.Collision")
 
 local ROWS, COLS = 5, 8
